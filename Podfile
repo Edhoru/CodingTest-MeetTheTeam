@@ -8,5 +8,8 @@ target 'MeetTheTeam' do
 
     #Architecture
     pod 'RIBs'
+    
+    #Animations
+    pod 'lottie-ios'
 
 end

@@ -13,7 +13,7 @@ protocol RootDependency: Dependency {
     // created by this RIB.
 }
 
-final class RootComponent: Component<RootDependency> {
+final class RootComponent: Component<RootDependency>, TeamListDependency, ProfileDependency {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -35,6 +35,12 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
         let viewController = RootViewController()
         let interactor = RootInteractor(presenter: viewController)
         
-        return RootRouter(interactor: interactor, viewController: viewController)
+        let teamListBuilder = TeamListBuilder(dependency: component)
+        let profileBuilder = ProfileBuilder(dependency: component)
+        
+        return RootRouter(interactor: interactor,
+                          viewController: viewController,
+                          teamListBuilder: teamListBuilder,
+                          profileBuilder: profileBuilder)
     }
 }
